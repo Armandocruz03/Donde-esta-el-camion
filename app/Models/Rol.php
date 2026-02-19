@@ -9,13 +9,12 @@ class Rol extends Model
 {
     use HasFactory;
 
-    protected $table = 'rols'; 
+    protected $table = 'rols';
 
     protected $fillable = ['nombre',];
-public function users()
-{
-    return $this->belongsToMany(User::class, 'rol_user', 'rol_id', 'user_id')
-                ->withTimestamps();
-}
 
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

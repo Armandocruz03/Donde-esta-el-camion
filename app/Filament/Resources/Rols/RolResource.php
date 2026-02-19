@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Rols;
 
+use App\Filament\Clusters\GestionAcceso\GestionAccesoCluster;
 use App\Filament\Resources\Rols\Pages\CreateRol;
 use App\Filament\Resources\Rols\Pages\EditRol;
 use App\Filament\Resources\Rols\Pages\ListRols;
@@ -18,7 +19,8 @@ class RolResource extends Resource
 {
     protected static ?string $model = Rol::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::UserCircle;
+    protected static ?string $cluster = GestionAccesoCluster::class;
 
     protected static ?string $recordTitleAttribute = 'Rol';
 

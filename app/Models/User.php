@@ -11,18 +11,19 @@ class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
-public function rols()
-{
-    return $this->belongsToMany(Rol::class, 'rol_user', 'user_id', 'rol_id')
-                ->withTimestamps();
-}
+
+    public function rol()
+    {
+        return $this->belongsTo(Rol::class);
+    }
+
 
     /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
-    protected $fillable = ['name','email','password','telephone','adress','numero','colonia','municipio',];
+    protected $fillable = ['name', 'email', 'password', 'telephone', 'adress', 'numero', 'colonia', 'municipio',];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -45,6 +46,5 @@ public function rols()
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-        
     }
 }

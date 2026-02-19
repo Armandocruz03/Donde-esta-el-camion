@@ -12,7 +12,7 @@ class TipoDeVehiculo extends Model
 
     protected $table = 'tipo_de_vehiculos';
 
-    protected $fillable = ['capacidad','marca','modelo'];
+    protected $fillable = ['capacidad','marca','modelo','dimensiones'];
 
     public function vehiculos()
     {

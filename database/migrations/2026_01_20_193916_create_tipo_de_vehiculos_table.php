@@ -17,10 +17,12 @@ return new class extends Migration
             $table->string('capacidad');
             $table->string('marca');
             $table->string('modelo');
+            $table->string('dimensiones')->nullable();
 
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

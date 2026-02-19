@@ -17,11 +17,13 @@ class VehiculosTable
     {
         return $table
             ->columns([
-                TextColumn::make('placas')
+                TextColumn::make('placa')
                     ->searchable(),
-                TextColumn::make('modelo')
+                TextColumn::make('tipoDeVehiculo.capacidad')
                     ->searchable(),
-                ColorColumn::make('color')
+                TextColumn::make('tipoDeVehiculo.marca')
+                    ->searchable(),
+                TextColumn::make('tipoDeVehiculo.modelo')
                     ->searchable(),
                 TextColumn::make('dimensiones')
                     ->searchable(),

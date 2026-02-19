@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Users;
 
+use App\Filament\Clusters\GestionAcceso\GestionAccesoCluster;
 use App\Filament\Resources\Users\Pages\CreateUser;
 use App\Filament\Resources\Users\Pages\EditUser;
 use App\Filament\Resources\Users\Pages\ListUsers;
@@ -20,7 +21,8 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
+    protected static ?string $cluster = GestionAccesoCluster::class;
 
     protected static ?string $recordTitleAttribute = 'User';
 

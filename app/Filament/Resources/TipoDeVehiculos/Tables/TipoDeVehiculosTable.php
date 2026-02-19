@@ -16,16 +16,13 @@ class TipoDeVehiculosTable
     {
         return $table
             ->columns([
-                SelectColumn::make('capacidad')
-                  ->options([
-        'Camion 2T' => 'Camion 2T',
-        'Camioneta de redilas 1T' => 'Camioneta de redilas 1T',
-        'Carro pequeño 100kg' => 'Carro pequeño 100kg',
-    ])
+                TextColumn::make('capacidad')
                     ->searchable(),
                 TextColumn::make('marca')
                     ->searchable(),
                 TextColumn::make('modelo')
+                    ->searchable(),
+                TextColumn::make('dimensiones')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
