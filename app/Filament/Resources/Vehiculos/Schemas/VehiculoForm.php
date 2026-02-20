@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Vehiculos\Schemas;
 
+use App\Models\User;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 use Filament\Forms\Components\ColorPicker;
@@ -15,13 +16,29 @@ class VehiculoForm
         return $schema
             ->components([
                 TextInput::make('placas')
-                    ->required(),
-                TextInput::make('modelo')
-                    ->required(),
-                ColorPicker::make('color'),
-                TextInput::make('dimensiones'),
-                Select::make('Tipo_de_Vehiculo_id')
-    ->             relationship(name: 'TipoDeVehiculo', titleAttribute: 'capacidad')
+                    ->required()
+                    ->unique(ignoreRecord: true)
+                    ->maxLength(255),
+
+                TextInput::make('anio')
+                    ->required()
+                    ->numeric()
+                    ->minValue(2000)
+                    ->maxValue(now()->year),
+
+                TextInput::make('color')
+                    ->nullable()
+                    ->maxLength(100),
+
+                Select::make('user_id')
+                    ->label('Conductor')
+                    ->options(
+                        User::whereHas('rol', function ($q) {
+                            $q->where('nombre', 'conductor');
+                        })->pluck('name', 'id')
+                    )
+                    ->searchable()
+                    ->nullable(),
             ]);
     }
 }

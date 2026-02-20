@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Vehiculos;
 
+use App\Filament\Clusters\Equipos\EquiposCluster;
 use App\Filament\Resources\Vehiculos\Pages\CreateVehiculo;
 use App\Filament\Resources\Vehiculos\Pages\EditVehiculo;
 use App\Filament\Resources\Vehiculos\Pages\ListVehiculos;
@@ -20,7 +21,8 @@ class VehiculoResource extends Resource
 {
     protected static ?string $model = Vehiculo::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTruck;
+    protected static ?string $cluster = EquiposCluster::class;
 
     protected static ?string $recordTitleAttribute = 'Vehiculo';
 

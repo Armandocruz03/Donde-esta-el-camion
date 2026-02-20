@@ -44,7 +44,7 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-                    \App\Filament\Resources\UserResource\RelationManagers\RolsRelationManager::class,
+          //s RolsRelationManager::class,
 
         ];
     }

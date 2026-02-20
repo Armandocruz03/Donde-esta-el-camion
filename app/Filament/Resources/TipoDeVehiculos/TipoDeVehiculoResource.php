@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\TipoDeVehiculos;
 
+use App\Filament\Clusters\Equipos\EquiposCluster;
 use App\Filament\Resources\TipoDeVehiculos\Pages\CreateTipoDeVehiculo;
 use App\Filament\Resources\TipoDeVehiculos\Pages\EditTipoDeVehiculo;
 use App\Filament\Resources\TipoDeVehiculos\Pages\ListTipoDeVehiculos;
@@ -19,7 +20,8 @@ class TipoDeVehiculoResource extends Resource
 {
     protected static ?string $model = TipoDeVehiculo::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSquares2x2;
+    protected static ?string $cluster = EquiposCluster::class;
 
     protected static ?string $recordTitleAttribute = 'TipoDeVehiculo';
 

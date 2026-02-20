@@ -3,8 +3,8 @@
 namespace App\Filament\Resources\TipoDeVehiculos\Schemas;
 
 use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Schema;
 use Filament\Forms\Components\Select;
+use Filament\Schemas\Schema;
 
 class TipoDeVehiculoForm
 {
@@ -12,17 +12,33 @@ class TipoDeVehiculoForm
     {
         return $schema
             ->components([
+
                 Select::make('capacidad')
-                  ->options([
-        'Camion 2T' => 'Camion 2T',
-        'Camioneta de redilas 1T' => 'Camioneta de redilas 1T',
-        'Carro pequeño 100kg' => 'Carro pequeño 100kg',
-    ])
-                    ->required(),
+                    ->options([
+                        '5 toneladas' => '5 toneladas',
+                        '8 toneladas' => '8 toneladas',
+                        '10 toneladas' => '10 toneladas',
+                        '15 toneladas' => '15 toneladas',
+                        '20 toneladas' => '20 toneladas',
+                    ])
+                    ->required()
+                    ->label('Capacidad de carga'),
+
                 TextInput::make('marca')
-                    ->required(),
+                    ->required()
+                    ->maxLength(255)
+                    ->label('Marca'),
+
                 TextInput::make('modelo')
-                    ->required(),
+                    ->required()
+                    ->maxLength(255)
+                    ->label('Modelo'),
+
+                TextInput::make('dimensiones')
+                    ->required()
+                    ->maxLength(255)
+                    ->placeholder('Ej. 6m x 2.5m x 3m')
+                    ->label('Dimensiones'),
             ]);
     }
 }

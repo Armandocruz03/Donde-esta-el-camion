@@ -29,27 +29,42 @@ class UserSeeder extends Seeder
         );
 
         // ==========================
-        // CONDUCTOR
-        // ==========================
-        User::updateOrCreate(
-            ['email' => 'conductor@test.com'],
-            [
-                'name' => 'Conductor',
-                'password' => Hash::make('password'),
-                'rol_id' => $conductorRol->id,
-            ]
-        );
-
-        // ==========================
         // USUARIO
         // ==========================
         User::updateOrCreate(
             ['email' => 'usuario@test.com'],
             [
-                'name' => 'Usuario',
+                'name' => 'Usuario General',
                 'password' => Hash::make('password'),
                 'rol_id' => $usuarioRol->id,
             ]
         );
+
+        // ==========================
+        // CONDUCTORES
+        // ==========================
+        $conductores = [
+            'Carlos Méndez',
+            'Luis Hernández',
+            'Jorge Ramírez',
+            'Miguel Torres',
+            'Ricardo Gómez',
+            'Antonio Vargas',
+            'Fernando Cruz',
+            'Eduardo Salas',
+            'Raúl Martínez',
+            'Sergio López',
+        ];
+
+        foreach ($conductores as $index => $nombre) {
+            User::updateOrCreate(
+                ['email' => 'conductor' . ($index + 1) . '@test.com'],
+                [
+                    'name' => $nombre,
+                    'password' => Hash::make('password'),
+                    'rol_id' => $conductorRol->id,
+                ]
+            );
+        }
     }
 }

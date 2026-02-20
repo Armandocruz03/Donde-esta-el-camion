@@ -14,14 +14,19 @@ class Vehiculo extends Model
 
     protected $fillable = [
         'placas',
-        'modelo',
+        'anio',
         'color',
-        'dimensiones',
+        'user_id',
         'tipo_de_vehiculo_id' 
     ];
 
     public function tipoDeVehiculo()
     {
         return $this->belongsTo(TipoDeVehiculo::class, 'tipo_de_vehiculo_id');
+    }
+
+    public function conductor()
+    {
+        return $this->belongsTo(User::class,'user_id');
     }
 }

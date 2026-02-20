@@ -17,24 +17,18 @@ class VehiculosTable
     {
         return $table
             ->columns([
-                TextColumn::make('placa')
-                    ->searchable(),
-                TextColumn::make('tipoDeVehiculo.capacidad')
-                    ->searchable(),
-                TextColumn::make('tipoDeVehiculo.marca')
-                    ->searchable(),
-                TextColumn::make('tipoDeVehiculo.modelo')
-                    ->searchable(),
-                TextColumn::make('dimensiones')
-                    ->searchable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+               TextColumn::make('placas')
+                    ->searchable()
+                    ->sortable(),
+
+                TextColumn::make('anio')
+                    ->sortable(),
+
+                TextColumn::make('color'),
+
+                TextColumn::make('conductor.name')
+                    ->label('Conductor')
+                    ->placeholder('Sin asignar'),
             ])
             ->filters([
                 //

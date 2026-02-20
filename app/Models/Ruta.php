@@ -15,18 +15,19 @@ class Ruta extends Model
         'nombre',
         'descripcion',
         'activa',
+        'color',
     ];
 
     protected $casts = [
         'activa' => 'boolean',
     ];
 
-    /**
-     * Relación: una Ruta tiene muchas Ubicaciones
-     */
-    public function ubicaciones()
+    public function puntos()
     {
-        return $this->hasMany(Ubicacion::class, 'ruta_id')
-                    ->orderBy('orden');
+        return $this->hasMany(RutaPunto::class)->orderBy('orden');
+    }
+    public function paradas()
+    {
+        return $this->hasMany(Parada::class);
     }
 }

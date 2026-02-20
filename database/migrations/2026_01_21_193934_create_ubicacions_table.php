@@ -11,14 +11,31 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ubicacions', function (Blueprint $table) {
+        Schema::create('ruta_puntos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('ruta_id')->constrained()->cascadeOnDelete();
+            $table->decimal('lat', 10, 7);
+            $table->decimal('lng', 10, 7);
+            $table->integer('orden'); // importante para dibujar en orden
+            $table->timestamps();
+        });
 
-    $table->foreignId('ruta_id')->constrained()->cascadeOnDelete();
-    $table->unsignedInteger('orden');
-    $table->string('nombre')->nullable();
-    $table->double('lat');
-    $table->double('lng');
+        Schema::create('paradas', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('ruta_id')->constrained()->cascadeOnDelete();
+
+            $table->string('nombre');
+
+            $table->decimal('lat', 10, 7);
+            $table->decimal('lng', 10, 7);
+
+            $table->time('hora'); // hora fija
+            $table->integer('duracion_minutos')->default(10);
+
+            // días de la semana en JSON
+            $table->json('dias'); // ["lunes","miercoles","viernes"]
+
+            $table->boolean('activa')->default(true);
 
             $table->timestamps();
         });
@@ -29,6 +46,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ubicacions');
+        Schema::dropIfExists('ruta_puntos');
     }
 };

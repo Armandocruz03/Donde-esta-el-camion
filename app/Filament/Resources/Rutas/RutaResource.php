@@ -9,7 +9,6 @@ use App\Filament\Resources\Rutas\Pages\ViewRuta;
 use App\Filament\Resources\Rutas\Schemas\RutaForm;
 use App\Filament\Resources\Rutas\Schemas\RutaInfolist;
 use App\Filament\Resources\Rutas\Tables\RutasTable;
-use App\Filament\Resources\Rutas\RelationManagers\UbicacionsRelationManager; 
 use App\Models\Ruta;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -43,7 +42,7 @@ class RutaResource extends Resource
     public static function getRelations(): array
     {
         return [
-            UbicacionsRelationManager::class, 
+           
         ];
     }
 

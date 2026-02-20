@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
 
             $table->string('nombre');
-            $table->text('descripcion')->nullable();
+            $table->string('descripcion')->nullable();
+            $table->string('color', 7)->default('#4CAF93'); // formato HEX
             $table->boolean('activa')->default(true);
 
             $table->timestamps();
