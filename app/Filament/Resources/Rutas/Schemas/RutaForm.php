@@ -20,6 +20,11 @@ class RutaForm
                     ->label('Color de la Ruta')
                     ->required()
                     ->default('#4CAF93'),
+                TextInput::make('segundos_avance')
+                    ->label('Segundos para avanzar')
+                    ->numeric()
+                    ->default(60)
+                    ->required(),
                 Textarea::make('descripcion')
                     ->columnSpanFull(),
                 Toggle::make('activa')

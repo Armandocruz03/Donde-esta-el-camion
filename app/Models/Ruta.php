@@ -16,6 +16,7 @@ class Ruta extends Model
         'descripcion',
         'activa',
         'color',
+        'segundos_avance',
     ];
 
     protected $casts = [

@@ -23,8 +23,11 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable = ['name', 'email', 'password', 'rol_id', 'telephone', 'adress', 'numero', 'colonia', 'municipio',];
-
+    protected $fillable = [
+    'name', 'email', 'password', 'rol_id',
+    'telephone', 'adress', 'numero', 'colonia', 'municipio',
+    'lat', 'lng', 'ruta_id', 'notifications_enabled',
+];
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -47,4 +50,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function canAccessPanel(\Filament\Panel $panel): bool
+        {
+            return $this->rol_id !== 3;
+        }
+
+    //Relación Ruta
+    public function ruta()
+        {
+            return $this->belongsTo(\App\Models\Ruta::class);
+        }
 }

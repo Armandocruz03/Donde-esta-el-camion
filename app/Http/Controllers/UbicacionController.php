@@ -1,86 +1,67 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
-use App\Models\Ruta;
-use App\Models\Ubicacion;
+use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 
-class UbicacionController extends Controller
+
+class RegistroCiudadanoController extends Controller
 {
-    /**
-     * Importar GeoJSON a rutas y ubicaciones
-     */
-    public function importarGeojson()
+    public function create()
     {
-        $path = public_path('maps/map.geojson');
+        return view('Portada.registro'); // tu formulario
+    }
 
-        if (!file_exists($path)) {
-            return response()->json([
-                'error' => 'map.geojson no encontrado'
-            ], 404);
-        }
-
-        $geojson = json_decode(file_get_contents($path), true);
-
-        foreach ($geojson['features'] as $feature) {
-
-            if (($feature['geometry']['type'] ?? null) !== 'Polygon') {
-                continue;
-            }
-
-            // Crear o actualizar la ruta por nombre
-            $nombreRuta = $feature['properties']['name'] ?? 'Ruta sin nombre';
-
-            $ruta = Ruta::firstOrCreate(
-                ['nombre' => $nombreRuta],
-                [
-                    'descripcion' => 'Importada desde GeoJSON',
-                    'activa' => true,
-                ]
-            );
-
-            // Borrar ubicaciones previas
-            Ubicacion::where('ruta_id', $ruta->id)->delete();
-
-            // Insertar puntos
-            $orden = 1;
-
-            foreach ($feature['geometry']['coordinates'] as $ring) {
-                foreach ($ring as $coord) {
-
-                    Ubicacion::create([
-                        'ruta_id' => $ruta->id,
-                        'orden'   => $orden,
-                        'nombre'  => "Punto $orden",
-                        'lng'     => $coord[0],
-                        'lat'     => $coord[1],
-                    ]);
-
-                    $orden++;
-                }
-            }
-        }
-
-        return response()->json([
-            'mensaje' => 'Rutas y ubicaciones importadas correctamente'
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6|confirmed',
+            'telephone' => 'required',
+            'adress' => 'required',
+            'numero' => 'required',
+            'colonia' => 'required',
+            'municipio' => 'required',
         ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'rol_id' => 3, // 🔥 Aquí lo forzamos como ciudadano
+            'telephone' => $request->telephone,
+            'adress' => $request->adress,
+            'numero' => $request->numero,
+            'colonia' => $request->colonia,
+            'municipio' => $request->municipio,
+        ]);
+
+        // 🔐 Login automático
+        Auth::login($user);
+
+        // 🚀 Redirección a portada
+        return redirect()->route('inicio');
+    }
+    private function obtenerDireccion($lat, $lng)
+{
+    $apiKey = config('services.google.maps_key');
+
+    $response = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
+        'latlng' => $lat . ',' . $lng,
+        'key' => $apiKey,
+        'language' => 'es'
+    ]);
+
+    if ($response->successful() && isset($response['results'][0])) {
+        return $response['results'][0]['formatted_address'];
     }
 
-    /**
-     * Mostrar el mapa de una ruta por URL
-     */
-    public function verRuta($rutaId)
-    {
-        $ruta = Ruta::findOrFail($rutaId);
-
-        $ubicaciones = Ubicacion::where('ruta_id', $ruta->id)
-            ->orderBy('orden')
-            ->get();
-
-        if ($ubicaciones->isEmpty()) {
-            abort(404, 'La ruta no tiene ubicaciones');
-        }
-
-        return view('mapa', compact('ruta', 'ubicaciones'));
-    }
+    return null;
+}
 }

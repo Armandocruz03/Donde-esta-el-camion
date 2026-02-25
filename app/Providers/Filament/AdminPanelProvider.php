@@ -28,7 +28,10 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-
+            ->renderHook(
+                    'panels::body.end',
+                    fn () => view('filament.scripts.alertas')
+                )
             ->brandName('Recolection')
             ->brandLogo(asset('images/logo.jpg'))
             ->brandLogoHeight('40px')

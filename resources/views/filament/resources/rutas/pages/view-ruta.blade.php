@@ -31,7 +31,7 @@
 
         <div class="space-y-4">
 
-            <x-filament::input label="Nombre" wire:model.defer="stopNombre" />
+            <x-filament::input label="Nombre" wire:model.defer="stopNombre" placeholder="Nombre de la Parada" class="ring-1 ring-gray-300 shadow-sm rounded-lg focus:ring-2 focus:ring-primary-500" />
 
             <x-filament::input type="time" label="Hora" wire:model.defer="stopHora" />
 

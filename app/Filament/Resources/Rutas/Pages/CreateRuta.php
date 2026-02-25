@@ -8,4 +8,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateRuta extends CreateRecord
 {
     protected static string $resource = RutaResource::class;
+    protected function getRedirectUrl(): string
+        {
+            return $this->getResource()::getUrl('index');
+        }
 }
+

@@ -20,8 +20,8 @@ class UsersTable
                 TextColumn::make('email')
                     ->label('Email address')
                     ->searchable(),
-                TextColumn::make('email_verified_at')
-                    ->dateTime()
+                TextColumn::make('rol.nombre')
+                    ->label('Tipo')
                     ->sortable(),
                 TextColumn::make('telephone')
                     ->searchable(),

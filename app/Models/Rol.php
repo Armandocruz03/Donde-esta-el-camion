@@ -13,6 +13,11 @@ class Rol extends Model
 
     protected $fillable = ['nombre',];
 
+    public function rol()
+    {
+        return $this->belongsTo(Rol::class);
+    }
+
     public function users()
     {
         return $this->hasMany(User::class);
