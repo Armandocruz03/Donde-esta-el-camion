@@ -8,8 +8,6 @@ use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\SelectColumn;
-use Filament\Tables\Columns\ImageColumn;
-
 
 
 class TipoDeVehiculosTable
@@ -23,8 +21,6 @@ class TipoDeVehiculosTable
                 TextColumn::make('marca')
                     ->searchable(),
                 TextColumn::make('modelo')
-                    ->searchable(),
-                      ImageColumn::make('imagen')
                     ->searchable(),
                 TextColumn::make('dimensiones')
                     ->searchable(),
