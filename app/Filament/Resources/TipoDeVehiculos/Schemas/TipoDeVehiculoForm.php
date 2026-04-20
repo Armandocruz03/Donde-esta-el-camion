@@ -5,7 +5,6 @@ namespace App\Filament\Resources\TipoDeVehiculos\Schemas;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
 use Filament\Schemas\Schema;
-use Filament\Forms\Components\FileUpload;
 
 
 class TipoDeVehiculoForm
