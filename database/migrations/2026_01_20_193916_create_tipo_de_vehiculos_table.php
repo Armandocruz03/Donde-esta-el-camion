@@ -16,6 +16,8 @@ return new class extends Migration
 
             $table->string('capacidad');
             $table->string('marca');
+                        
+           $table->string('imagen');
             $table->string('modelo');
             $table->string('dimensiones')->nullable();
 
