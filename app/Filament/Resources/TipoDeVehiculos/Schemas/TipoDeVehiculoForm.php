@@ -5,6 +5,8 @@ namespace App\Filament\Resources\TipoDeVehiculos\Schemas;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
 use Filament\Schemas\Schema;
+use Filament\Forms\Components\FileUpload;
+
 
 class TipoDeVehiculoForm
 {
@@ -29,7 +31,7 @@ class TipoDeVehiculoForm
                     ->maxLength(255)
                     ->label('Marca'),
                          
-                            FileUpload::make('imagen')
+                FileUpload::make('imagen')
                      ->disk('public'),
 
                 TextInput::make('modelo')
