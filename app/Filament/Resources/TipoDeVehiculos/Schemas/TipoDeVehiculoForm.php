@@ -28,6 +28,9 @@ class TipoDeVehiculoForm
                     ->required()
                     ->maxLength(255)
                     ->label('Marca'),
+                         
+                            FileUpload::make('imagen')
+                     ->disk('public'),
 
                 TextInput::make('modelo')
                     ->required()
