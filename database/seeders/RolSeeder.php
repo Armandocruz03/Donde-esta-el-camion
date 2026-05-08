@@ -9,16 +9,18 @@ class RolSeeder extends Seeder
 {
     public function run(): void
     {
+        // Usamos una estructura de clave => valor para mayor claridad
         $roles = [
-            'admin',
-            'conductor',
-            'usuario',
+            1 => 'admin',
+            2 => 'conductor',
+            3 => 'usuario',
         ];
 
-        foreach ($roles as $rol) {
-            Rol::firstOrCreate([
-                'nombre' => $rol,
-            ]);
+        foreach ($roles as $id => $nombre) {
+            Rol::updateOrCreate(
+                ['id' => $id], // Busca por ID para que siempre sea el 3
+                ['nombre' => $nombre]
+            );
         }
     }
 }
